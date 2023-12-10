@@ -24,5 +24,8 @@ void AnimationDisplayer::loop()
         setup();
 
     _animation->set_next_frame();
-    FastLED.delay(1000 / _framerate);
+    if (_framerate > 0)
+        FastLED.delay(1000 / _framerate);
+    else
+        FastLED.delay(0);
 }

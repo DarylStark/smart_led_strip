@@ -8,7 +8,7 @@
 #define DATA_PIN 26
 
 CRGB leds[NUM_LEDS];
-AnimationDisplayer ad(leds, NUM_LEDS, 30);
+AnimationDisplayer ad(leds, NUM_LEDS, 100);
 
 // Animations
 WalkingLED *wl = new WalkingLED;

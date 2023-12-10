@@ -1,15 +1,16 @@
 #include "walking_led.h"
 
-WalkingLED::WalkingLED(uint32_t framerate)
-    : Animation(framerate), _index(0)
+WalkingLED::WalkingLED()
+    : _index(0)
 {
 }
 
-void WalkingLED::show()
+void WalkingLED::setup()
 {
-    FastLED.clear();
+}
+
+void WalkingLED::set_next_frame()
+{
+    _buffer[(_index - 1) % _size] = CRGB::Black;
     _buffer[_index++ % _size] = CRGB::Red;
-    FastLED.delay(1000 / _framerate);
-    if (_index < _size)
-        show();
 }

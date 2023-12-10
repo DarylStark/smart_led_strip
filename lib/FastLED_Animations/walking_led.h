@@ -9,8 +9,9 @@ private:
     uint32_t _index;
 
 public:
-    WalkingLED(uint32_t framerate);
-    void show() override;
+    WalkingLED();
+    void setup() override;
+    void set_next_frame() override;
 };
 
 #endif /* __WALKING_LED_H__ */

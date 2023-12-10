@@ -8,12 +8,13 @@ class Animation
 protected:
     CRGB *_buffer;
     uint32_t _size;
-    uint32_t _framerate;
 
 public:
-    Animation(uint32_t framerate);
     void set_details(CRGB *buffer, uint32_t size);
-    virtual void show() = 0;
+
+    // Pure abstract functions
+    virtual void set_next_frame() = 0;
+    virtual void setup() = 0;
 };
 
 #endif /* __ANIMATION_H__ */

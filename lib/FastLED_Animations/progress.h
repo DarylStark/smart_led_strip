@@ -14,6 +14,7 @@ public:
     void set_next_frame() override;
 
     void set_progress(uint8_t progress);
+    uint8_t get_progress() const;
 };
 
 #endif /* __PROGRESS_H__ */

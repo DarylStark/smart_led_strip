@@ -26,3 +26,8 @@ void Progress::set_progress(uint8_t progress)
     if (progress <= 100)
         _progress = progress;
 }
+
+uint8_t Progress::get_progress() const
+{
+    return _progress;
+}

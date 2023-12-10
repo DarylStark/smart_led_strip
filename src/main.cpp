@@ -8,10 +8,10 @@
 #define DATA_PIN 26
 
 CRGB leds[NUM_LEDS];
-AnimationDisplayer ad(leds, NUM_LEDS, 100);
+AnimationDisplayer ad(leds, NUM_LEDS, 20);
 
 // Animations
-WalkingLED *wl = new WalkingLED;
+Progress progress;
 
 void setup()
 {
@@ -20,10 +20,11 @@ void setup()
     FastLED.setBrightness(5);
     FastLED.clear();
 
-    ad.set_animation(wl);
+    ad.set_animation(&progress);
 }
 
 void loop()
 {
+    progress.set_progress(progress.get_progress() + 1);
     ad.loop();
 }

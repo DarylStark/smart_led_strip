@@ -1,29 +1,26 @@
 #include <Arduino.h>
 #include <FastLED.h>
+#include <animation_displayer.h>
+#include <walking_led.h>
 
 #define NUM_LEDS 100
 #define DATA_PIN 26
 
 CRGB leds[NUM_LEDS];
-#include "fire_effect.h"
+AnimationDisplayer ad(leds, NUM_LEDS);
 
 void setup()
 {
-    Serial.begin(115200);
-    delay(3000);
-    FastLED.addLeds<WS2812B, DATA_PIN, COLOR_ORDER>(leds, NUM_LEDS).setCorrection(TypicalLEDStrip);
+    FastLED.addLeds<NEOPIXEL, DATA_PIN>(leds, NUM_LEDS);
     FastLED.setBrightness(5);
-    gPal = HeatColors_p;
+
+    Animation *ani = new WalkingLED(60);
+    leds[0] = CRGB::Green;
+    ad.show(ani);
+    delete ani;
 }
 
 void loop()
 {
-    // Add entropy to random number generator; we use a lot of it.
-    random16_add_entropy(random());
-
-    Fire2012(); // run simulation frame, using palette colors
-
-    FastLED.show(); // display this frame
-    FastLED.delay(1000 / FRAMES_PER_SECOND);
-    Serial.println('.');
+    delay(1000);
 }

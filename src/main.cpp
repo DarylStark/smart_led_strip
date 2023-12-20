@@ -34,23 +34,23 @@ void setup()
     Serial.begin(115200);
 
     WiFiManager wm;
-    if (wm.autoConnect("Smart LED Strip"))
-    {
-        // Set up the FastLED strip
-        FastLED.addLeds<NEOPIXEL, DATA_PIN>(leds, NUM_LEDS);
-        FastLED.setBrightness(5);
-        FastLED.clear();
-        FastLED.show();
+    if (!wm.autoConnect("Smart LED Strip"))
+        return;
 
-        // Start the AnimationDisplayer loop
-        ad.start_loop_thread();
-        ad.set_animation(&progress);
+    // Set up the FastLED strip
+    FastLED.addLeds<NEOPIXEL, DATA_PIN>(leds, NUM_LEDS);
+    FastLED.setBrightness(5);
+    FastLED.clear();
+    FastLED.show();
 
-        // Create the web application
-        web.on("/up", progress_up);
-        web.on("/down", progress_down);
-        web.begin();
-    }
+    // Start the AnimationDisplayer loop
+    ad.start_loop_thread();
+    ad.set_animation(&progress);
+
+    // Create the web application
+    web.on("/up", progress_up);
+    web.on("/down", progress_down);
+    web.begin();
 }
 
 void loop()

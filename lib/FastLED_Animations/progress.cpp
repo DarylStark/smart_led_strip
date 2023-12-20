@@ -11,10 +11,10 @@ void Progress::setup()
 
 void Progress::set_next_frame()
 {
-    double percentage = static_cast<double>(_progress) / 100;
+    double percentage = static_cast<double>(_progress) / 100.d;
     double num_leds = _size * percentage;
     FastLED.clear(); // TODO: Make this a protected member function of `Animation`
-    for (uint32_t index = 0; index < num_leds; index++)
+    for (uint32_t index = 0; index < static_cast<int>(num_leds); index++)
         _buffer[index] = CRGB::Green;
 }
 
